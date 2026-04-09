@@ -36,13 +36,32 @@ article = wikipedia.page("Artemis II", auto_suggest=False).content
 tokens = tokenize(article)
 print(tokens)
 
+with open("sorted_stoplist.txt", "r", encoding='utf8') as f:
+    stoplist = f.read()
+
+stoplist_tokenized = tokenize(stoplist)
+print(stoplist_tokenized)
+
 freqs = {}
 
 for word in tokens:
-    if word in freqs:
-        freqs[word] += 1
-    else:
-        freqs[word] = 1
+    if word not in stoplist_tokenized:
+        if word in freqs:
+            freqs[word] += 1
+        else:
+            freqs[word] = 1
+#print(freqs)
 
+#print total unique words and total number of words
+unique_words = len(freqs)
+total_num_words = sum(freqs.values())
+print(f"Total Unique Words: {unique_words}")
+print(f"Total Number of Words: {total_num_words}")
 
-print(freqs)
+print()
+
+#print the top 20
+top_words = sorted(freqs.items(), key=lambda x: x[1], reverse=True)
+
+for word, count in top_words[:20]:
+    print(f" {word}: {count}")
