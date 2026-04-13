@@ -151,6 +151,9 @@ class BayesClassifier:
         
 
         # return a string of "positive" or "negative"
+        self.save_dict(self.pos_frqs, self.pos_filename)
+        self.save_dict(self.neg_freqs, self.neg_filename)
+
 
     def load_file(self, filepath: str) -> str:
         """Loads text of given file
@@ -231,8 +234,10 @@ class BayesClassifier:
             freqs - dictionary of frequencies to update
         """
         # TODO: your work here
-        
-        
+        freqs[words]
+
+
+
         
 
         pass  # remove this line once you've implemented this method
